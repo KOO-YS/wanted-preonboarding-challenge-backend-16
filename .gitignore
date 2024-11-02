@@ -40,3 +40,5 @@ out/
 Dockerfile_b
 Dockerfile_bak_b
 
+### docker volume ###
+/data/

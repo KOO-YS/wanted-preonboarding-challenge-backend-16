@@ -18,8 +18,15 @@ public class ReserveController {
     private final ReservationService reservationService;
     private final CancelService cancelService;
 
+    /**
+     * TODO : 예약 시스템
+     * @param request : 고객 이름, 휴대전화, 잔고 금액, 예약공연ID, 회차, 좌석
+     * @return response : 예매완료 공연정보(공연ID, 공연명, 회차, 좌석)
+     * 주의 : 예약 결제 시 할인 정책 적용
+     * @throws Exception
+     */
     @PostMapping("/")
-    public ResponseHandler<TicketV3> reservation() throws Exception {
+    public ResponseHandler<TicketV3> reservation(@RequestBody RequestReservation request) throws Exception {
         TicketV3 ticket = reservationService.reserveV3(RequestReservation.builder()
             .performanceId(UUID.fromString("4438a3e6-b01c-11ee-9426-0242ac180002"))
             .performanceName("레베카")
@@ -39,6 +46,16 @@ public class ReserveController {
             .message("SUCCESS")
             .data(ticket)
             .build();
+    }
+
+    /**
+     * TODO : 예약 조회 시스템
+     * @param request : 고객 정보(고객 이름, 연락처)
+     * @return 예매 완료된 공연 정보(공연ID, 공연명, 회차, 좌석정보) + 고객 정보(고객 이름, 연락처)
+     */
+    @GetMapping("/")
+    ResponseHandler<TicketV3> getReservation(@RequestBody RequestReservation request) throws Exception {
+        return null;
     }
 
     @GetMapping("/cancel")
