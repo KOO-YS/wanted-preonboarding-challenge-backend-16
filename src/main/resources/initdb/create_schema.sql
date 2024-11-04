@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `performance`
     UNIQUE KEY (id, round)
 );
 
-CREATE TABLE IF NOT EXISTS `performance_discount_policy_info`
+CREATE TABLE IF NOT EXISTS `performance_discount_policy`
 (
     `id`             INT(10)                NOT NULL AUTO_INCREMENT,
     `performance_id` BINARY(16)             NOT NULL COMMENT '공연전시ID',

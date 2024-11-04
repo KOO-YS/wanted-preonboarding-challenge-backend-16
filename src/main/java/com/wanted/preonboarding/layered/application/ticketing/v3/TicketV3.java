@@ -4,6 +4,7 @@ import com.wanted.preonboarding.layered.application.ticketing.v3.policy.Discount
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class TicketV3 {
     private int totalPrice;
     private final int fixedPrice;
     private int discountedFee;
-    private Set<DiscountPolicy> appliedDiscountPolicies;
+    private Set<DiscountPolicy> appliedDiscountPolicies = new HashSet<>();
 
     public TicketV3 calculateTotalFee() {
         setCalculatedDiscountFee();
@@ -27,8 +28,12 @@ public class TicketV3 {
     }
 
     private void setCalculatedDiscountFee() {
-        discountedFee = this.getAppliedDiscountPolicies().stream()
-            .map(DiscountPolicy::calculateDiscountFee)
-            .reduce(Integer::sum).orElse(0);
+        try {
+            discountedFee = this.getAppliedDiscountPolicies().stream()
+                .map(DiscountPolicy::calculateDiscountFee)
+                .reduce(Integer::sum).orElse(0);
+        } catch (NullPointerException e) {
+            discountedFee = 0;
+        }
     }
 }

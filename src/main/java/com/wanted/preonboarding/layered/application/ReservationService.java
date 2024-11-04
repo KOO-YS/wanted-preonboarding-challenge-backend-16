@@ -25,8 +25,7 @@ public class ReservationService {
 
     @Transactional
     public TicketV3 reserveV3(RequestReservation requestReservationInfo) throws Exception {
-        Client client = new Client(requestReservationInfo.getReservationName(),
-            requestReservationInfo.getReservationPhoneNumber(), requestReservationInfo.getDepositAmount());
+        Client client = new Client(requestReservationInfo.getReservationName(), requestReservationInfo.getReservationPhoneNumber(), requestReservationInfo.getDepositAmount());
         TicketV3 ticket = ticketSellerV3.sellTo(requestReservationInfo);
         client.pay(ticket.getTotalPrice());
         return ticket;
