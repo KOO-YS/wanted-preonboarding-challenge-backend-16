@@ -22,12 +22,11 @@ public class TicketFactory {
             .line(requestReservationInfo.getLine())
             .seat(requestReservationInfo.getSeat())
             .fixedPrice(requestReservationInfo.getFixedPrice())
-            // FIXME : DB 내용 없음
-//            .appliedDiscountPolicies(requestReservationInfo.getAppliedPolicies()
-//                .stream()
-//                .map(policyName -> getAppliedDiscountPolicy(requestReservationInfo.getPerformanceId(), requestReservationInfo.getFixedPrice(), policyName))
-//                .collect(Collectors.toSet())
-//            )
+            .appliedDiscountPolicies(requestReservationInfo.getAppliedPolicies()
+                .stream()
+                .map(policyName -> getAppliedDiscountPolicy(requestReservationInfo.getPerformanceId(), requestReservationInfo.getFixedPrice(), policyName))
+                .collect(Collectors.toSet())
+            )
             .build();
     }
 

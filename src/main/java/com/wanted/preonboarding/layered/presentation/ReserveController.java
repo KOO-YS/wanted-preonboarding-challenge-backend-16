@@ -40,7 +40,6 @@ public class ReserveController {
             .seat(request.getSeat())
             .appliedPolicies(Arrays.asList(new String[]{"telecome"}))
             .build());
-        System.out.println("reservation");
         return ResponseHandler.<TicketV3>builder()
             .statusCode(HttpStatus.OK)
             .message("SUCCESS")
