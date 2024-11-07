@@ -18,7 +18,11 @@ public class TicketSellerV3 {
     }
 
     public TicketV3 sellTo(RequestReservation requestReservationInfo) throws Exception {
-        return ticketFactory.ticketing(requestReservationInfo)
-            .calculateTotalFee();
+        boolean availability = ticketOffice.checkSeatAvailability(requestReservationInfo.getPerformanceId(), requestReservationInfo.getRound(), requestReservationInfo.getLine(), requestReservationInfo.getSeat());
+        if (availability)
+            return ticketFactory.ticketing(requestReservationInfo)
+                .calculateTotalFee();
+        else
+            throw new Exception(); // FIXME : 불가능 좌석
     }
 }

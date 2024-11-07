@@ -17,7 +17,7 @@ VALUES (DEFAULT, (SELECT id FROM performance limit 1), "유진호", "010-1234-12
 
 INSERT INTO performance_discount_policy (performance_id, type, name, rate, discount_fee)
     SELECT
-        performance.id, "할인률", "telecom", 10, 0
+        performance.id, "할인률", "telecome", 10, 0
     FROM
         performance
 WHERE

@@ -31,7 +31,6 @@ public class ReservationService {
     @Transactional
     public TicketV3 reserveV3(RequestReservation requestReservationInfo) throws Exception {
         Client client = new Client(requestReservationInfo.getReservationName(), requestReservationInfo.getReservationPhoneNumber(), requestReservationInfo.getDepositAmount());
-        // TODO : 예약 가능 좌석 확인 및 좌석 예약 완료 처리
 
         TicketV3 ticket = ticketSellerV3.sellTo(requestReservationInfo);
         client.pay(ticket.getTotalPrice());

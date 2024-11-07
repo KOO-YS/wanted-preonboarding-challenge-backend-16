@@ -4,7 +4,9 @@ import com.wanted.preonboarding.layered.application.ticketing.v2.policy.FeePolic
 import com.wanted.preonboarding.layered.application.ticketing.v2.policy.BasicFeePolicy;
 import com.wanted.preonboarding.layered.application.ticketing.v2.policy.NewMember;
 import com.wanted.preonboarding.layered.application.ticketing.v2.policy.Telecom;
+import com.wanted.preonboarding.layered.domain.entity.ticketing.PerformanceSeatInfo;
 import com.wanted.preonboarding.layered.infrastructure.repository.PerformanceRepository;
+import com.wanted.preonboarding.layered.infrastructure.repository.PerformanceSeatInfoRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.UUID;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -23,6 +26,9 @@ public class TicketSellerTest {
     @Autowired
     private PerformanceRepository performanceRepository;
 
+    @Autowired
+    private PerformanceSeatInfoRepository performanceSeatInfoRepository;
+
     private final int ticketPrice = 10000;
     private final PriorityQueue<String> queue = new PriorityQueue<>();
 
@@ -30,6 +36,13 @@ public class TicketSellerTest {
     @DisplayName("공연 정보 전체 조회")
     public void getAllPerformanceInfoListTests() {
         System.out.println("RESULT => " + performanceRepository.findAll());
+    }
+
+    @Test
+    @DisplayName("선택 좌석 상태 확인")
+    public void checkSeatAvailability() {
+        PerformanceSeatInfo seatInfo = performanceSeatInfoRepository.findByPerformanceIdAndRoundAndLineAndSeat(UUID.fromString("3e748812-9ab5-11ef-b010-0242ac120002"), 1, 'A', 3);
+        System.out.println(seatInfo);
     }
 
     @Test
