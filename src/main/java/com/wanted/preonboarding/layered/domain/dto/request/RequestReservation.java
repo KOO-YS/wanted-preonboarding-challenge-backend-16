@@ -25,6 +25,6 @@ public class RequestReservation {
     private final String reservationPhoneNumber;
     private final int depositAmount;
 
-    private final String reservationStatus; // 예약; 취소;
+    private final ReservationStatus reservationStatus; // 예약; 취소;
     private final List<String> appliedPolicies; // ['telecome', 'new_member', 'okcashback', 'happy_point']
 }

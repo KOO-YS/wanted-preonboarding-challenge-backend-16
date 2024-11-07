@@ -16,27 +16,34 @@ VALUES (DEFAULT, (SELECT id FROM performance limit 1), "유진호", "010-1234-12
 #VALUES (uuid_to_bin("3e748812-9ab5-11ef-b010-0242ac120002"), "할인률", "telecom", 5, 0);
 
 INSERT INTO performance_discount_policy (performance_id, type, name, rate, discount_fee)
-SELECT
-    performance.id,
-    "할인률",
-    "telecom",
-    5,
-    0
-FROM
-    performance
+    SELECT
+        performance.id, "할인률", "telecom", 10, 0
+    FROM
+        performance
 WHERE
     performance.id = (SELECT MAX(id) FROM performance);
 
 
 INSERT INTO performance_discount_policy (performance_id, type, name, rate, discount_fee)
+    SELECT
+        performance.id, "일정금액", "new_member", 0, 10000
+    FROM
+        performance
+WHERE
+    performance.id = (SELECT MAX(id) FROM performance);
+
+INSERT INTO performance_discount_policy (performance_id, type, name, rate, discount_fee)
 SELECT
-    performance.id,
-    "일정금액",
-    "new_member",
-    0,
-    10000
+    performance.id, "할인률", "okcashback", 5, 0
 FROM
     performance
 WHERE
     performance.id = (SELECT MAX(id) FROM performance);
 
+INSERT INTO performance_discount_policy (performance_id, type, name, rate, discount_fee)
+SELECT
+    performance.id, "할인률", "happy_point", 5, 0
+FROM
+    performance
+WHERE
+    performance.id = (SELECT MAX(id) FROM performance);
